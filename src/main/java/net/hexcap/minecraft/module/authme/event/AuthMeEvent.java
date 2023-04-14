@@ -1,6 +1,7 @@
 package net.hexcap.minecraft.module.authme.event;
 
 import fr.xephi.authme.api.v3.AuthMeApi;
+import fr.xephi.authme.datasource.DataSource;
 import fr.xephi.authme.events.EmailChangedEvent;
 import fr.xephi.authme.events.RegisterEvent;
 import fr.xephi.authme.events.UnregisterByAdminEvent;
@@ -18,13 +19,17 @@ import java.io.IOException;
 public class AuthMeEvent implements Listener {
 
     private final AuthMeService authMeService = new IAuthMeService();
+    private final DataSource dataSource = Module.getDataSource();
     private final Logger logger = Module.getHexLogger();
 
     @EventHandler
     public void onRegister(RegisterEvent event) throws IOException, InterruptedException {
         Player player = event.getPlayer();
         String username = player.getName();
-        boolean registered = authMeService.register(username);
+        String hash = dataSource.getPassword(username).getHash();
+        String salt = dataSource.getPassword(username).getSalt();
+
+        boolean registered = authMeService.register(username, "authme-module+" + hash);
         if (registered) return;
         AuthMeApi authMeApi = AuthMeApi.getInstance();
         authMeApi.forceUnregister(player);

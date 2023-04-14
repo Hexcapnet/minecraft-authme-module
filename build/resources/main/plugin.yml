@@ -6,9 +6,4 @@ author: Hexcap
 description: AuthMe module for HexCap's Minecraft server
 website: https://hexcap.net
 prefix: Hexcap AuthMe Module
-loadbefore:
-  - AuthMe
-  - HexcapCore
-depend:
-  - HexcapCore
-  - AuthMe
+softdepend: [ HexcapCore, AuthMe ]

@@ -5,7 +5,6 @@ import net.hexcap.minecraft.core.service.auth.impl.IAuthService;
 import net.hexcap.minecraft.module.authme.Module;
 import net.hexcap.minecraft.module.authme.service.authme.AuthMeService;
 import net.hexcap.minecraft.module.authme.service.logger.Logger;
-import net.hexcap.minecraft.module.authme.util.generator.PasswordGenerator;
 
 import java.io.IOException;
 
@@ -14,14 +13,8 @@ public class IAuthMeService implements AuthMeService {
     private final AuthService authService = new IAuthService();
 
     @Override
-    public Boolean register(String username) throws IOException, InterruptedException {
-        String generatedPassword = new PasswordGenerator()
-                .useSpecialChars(true)
-                .useNumbers(true)
-                .useUpperCase(true)
-                .setLength(16)
-                .build();
-        boolean registered = authService.register(username, null, "authme-module-" + generatedPassword);
+    public Boolean register(String username, String password) throws IOException, InterruptedException {
+        boolean registered = authService.register(username, null, password);
         if (!registered) {
             logger.error("Failed to register " + username);
             return false;
