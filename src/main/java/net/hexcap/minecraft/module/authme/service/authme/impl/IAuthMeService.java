@@ -1,48 +1,34 @@
 package net.hexcap.minecraft.module.authme.service.authme.impl;
 
-import net.hexcap.minecraft.core.service.auth.AuthService;
-import net.hexcap.minecraft.core.service.auth.impl.IAuthService;
-import net.hexcap.minecraft.module.authme.Module;
+import fr.xephi.authme.api.v3.AuthMeApi;
 import net.hexcap.minecraft.module.authme.service.authme.AuthMeService;
-import net.hexcap.minecraft.module.authme.service.logger.Logger;
-
-import java.io.IOException;
 
 public class IAuthMeService implements AuthMeService {
-    private final Logger logger = Module.getHexLogger();
-    private final AuthService authService = new IAuthService();
+
+    private final AuthMeApi authMeApi = AuthMeApi.getInstance();
 
     @Override
-    public Boolean register(String username, String password) throws IOException, InterruptedException {
-        boolean registered = authService.register(username, null, password);
-        if (!registered) {
-            logger.error("Failed to register " + username);
-            return false;
-        }
-        logger.info("Registered " + username);
-        return true;
-    }
-
-
-    @Override
-    public Boolean updateEmail(String username, String email) throws IOException, InterruptedException {
-        boolean updated = authService.updateEmail(username, email);
-        if (!updated) {
-            logger.error("Failed to update " + username + "'s email to " + email);
-            return false;
-        }
-        logger.info("Updated " + username + "'s email to " + email);
-        return true;
+    public Boolean register(String username, String password) {
+        return authMeApi.registerPlayer(username, password);
     }
 
     @Override
-    public Boolean unRegister(String username) throws IOException, InterruptedException {
-        boolean unRegistered = authService.unRegister(username);
-        if (!unRegistered) {
-            logger.error("Failed to unregister " + username);
+    public Boolean updatePassword(String username, String password) {
+        try {
+            authMeApi.changePassword(username, password);
+            return true;
+        } catch (Exception e) {
             return false;
         }
-        logger.info("Unregistered " + username);
-        return true;
+    }
+
+    @Override
+    public Boolean unRegister(String username) {
+        try {
+            authMeApi.forceUnregister(username);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
