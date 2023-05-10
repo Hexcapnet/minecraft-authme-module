@@ -47,7 +47,6 @@ public final class Module extends JavaPlugin {
             getHexLogger().error("Not connected to AuthMe!");
             Bukkit.getPluginManager().disablePlugin(this);
         }
-
         AuthMeHandler authMeHandler = new AuthMeHandler();
         authMeHandler.checkUsers();
     }

@@ -1,9 +1,11 @@
-name: AuthMeModule
+name: Hexauth
 version: '${version}'
 main: net.hexcap.minecraft.module.authme.Module
 api-version: 1.16
 author: Hexcap
-description: AuthMe module for HexCap's Minecraft server
+description: AuthMe module for Hexcap's Minecraft server
 website: https://hexcap.net
-prefix: Hexcap AuthMe Module
-softdepend: [ HexcapCore, AuthMe ]
+prefix: Hexauth
+depend:
+  - AuthMe
+  - Hexcore

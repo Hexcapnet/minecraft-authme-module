@@ -11,7 +11,7 @@ public class IAuthService implements AuthService {
     private final net.hexcap.minecraft.core.service.auth.AuthService authService = new net.hexcap.minecraft.core.service.auth.impl.IAuthService();
 
     @Override
-    public Boolean register(String username, String password) throws IOException, InterruptedException {
+    public Boolean register(String username, String password) {
         boolean registered = authService.register(username, null, password);
         if (!registered) {
             logger.error("Failed to register " + username);
@@ -23,7 +23,7 @@ public class IAuthService implements AuthService {
 
 
     @Override
-    public Boolean unRegister(String username) throws IOException, InterruptedException {
+    public Boolean unRegister(String username) {
         boolean unRegistered = authService.unRegister(username);
         if (!unRegistered) {
             logger.error("Failed to unregister " + username);

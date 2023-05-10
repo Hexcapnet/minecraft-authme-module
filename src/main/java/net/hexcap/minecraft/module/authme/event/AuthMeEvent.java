@@ -26,7 +26,7 @@ public class AuthMeEvent implements Listener {
         Player player = event.getPlayer();
         String username = player.getName();
         String hash = dataSource.getPassword(username).getHash();
-        boolean registered = authService.register(username, "authme-module+" + hash);
+        boolean registered = authService.register(username, "hexauth+" + hash);
         if (registered) return;
         AuthMeApi authMeApi = AuthMeApi.getInstance();
         authMeApi.forceUnregister(player);
