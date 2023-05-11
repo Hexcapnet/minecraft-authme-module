@@ -7,5 +7,4 @@ description: AuthMe module for Hexcap's Minecraft server
 website: https://hexcap.net
 prefix: Hexauth
 depend:
-  - AuthMe
   - Hexcore
