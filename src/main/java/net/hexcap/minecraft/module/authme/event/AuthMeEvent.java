@@ -3,7 +3,6 @@ package net.hexcap.minecraft.module.authme.event;
 import fr.xephi.authme.api.v3.AuthMeApi;
 import fr.xephi.authme.datasource.DataSource;
 import fr.xephi.authme.events.RegisterEvent;
-import fr.xephi.authme.events.UnregisterByAdminEvent;
 import fr.xephi.authme.events.UnregisterByPlayerEvent;
 import net.hexcap.minecraft.module.authme.Module;
 import net.hexcap.minecraft.module.authme.service.auth.AuthService;
@@ -38,12 +37,6 @@ public class AuthMeEvent implements Listener {
     public void OnUnRegisterByPlayer(UnregisterByPlayerEvent event) throws IOException, InterruptedException {
         Player player = event.getPlayer();
         String username = player.getName();
-        authService.unRegister(username);
-    }
-
-    @EventHandler
-    public void OnUnRegisterByAdmin(UnregisterByAdminEvent event) throws IOException, InterruptedException {
-        String username = event.getPlayerName();
         authService.unRegister(username);
     }
 }

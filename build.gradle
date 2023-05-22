@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'net.hexcap.minecraft'
-version = '1.0.2'
+version = '1.0.4'
 
 publishing {
     publications {
@@ -57,7 +57,7 @@ repositories {
 
 dependencies {
     implementation 'net.hexcap.modules:utils:1.0'
-    compileOnly 'net.hexcap.minecraft:hexcap-core:1.1.0-SNAPSHOT'
+    compileOnly 'net.hexcap.minecraft:hexcore:1.1.5'
     compileOnly 'fr.xephi:authme:5.6.0-SNAPSHOT'
     compileOnly 'org.projectlombok:lombok:1.18.20'
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
