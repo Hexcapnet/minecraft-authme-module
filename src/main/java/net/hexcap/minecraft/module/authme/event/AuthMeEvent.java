@@ -39,4 +39,11 @@ public class AuthMeEvent implements Listener {
         String username = player.getName();
         authService.unRegister(username);
     }
+
+    @EventHandler
+    public void OnUnRegisterByAdmin(UnregisterByPlayerEvent event) throws IOException, InterruptedException {
+        Player player = event.getPlayer();
+        String username = player.getName();
+        authService.unRegister(username);
+    }
 }
